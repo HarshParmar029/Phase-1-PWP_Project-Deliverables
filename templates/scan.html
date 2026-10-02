@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Scan / Verify QR{% endblock %}
+{% block content %}
+<div class="card" style="max-width:640px;margin:0 auto;">
+  <h1>Verify a Digital Tourist ID by QR</h1>
+  <p class="sub">Scan the tourist's QR with any scanner app, paste the text below. The HMAC signature and the whole ledger are checked.</p>
+  <form method="POST" action="/scan">
+    <label>QR text</label>
+    <input type="text" name="qr" placeholder="TID:TID-XXXXXXXX|HASH:...|SIG:...|VERIFY:/verify/TID-XXXXXXXX" required>
+    <div style="margin-top:16px;"><button class="btn btn-success" type="submit">Verify</button></div>
+  </form>
+</div>
+{% endblock %}

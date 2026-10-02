@@ -1,0 +1,4 @@
+detector,accuracy,precision,recall,f1,episode_detection,delay_s,false_alert_traj,false_alerts_per_hour
+Rules only,0.8094,0.9999,0.5055,0.6715,0.7622,275.8608,0.0033,0.0083
+Isolation Forest only,0.6926,0.9795,0.2072,0.3412,0.7867,388.7925,0.0833,0.2667
+Hybrid (proposed),0.8382,0.9961,0.5824,0.735,0.9789,281.2709,0.0367,0.1
