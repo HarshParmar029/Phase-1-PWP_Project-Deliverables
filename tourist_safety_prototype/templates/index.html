@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Home - Tourist Safety{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Tourist Safety Monitoring &amp; Incident Response System</h1>
+  <p class="sub">AI anomaly detection · Geo-fencing · Blockchain-based Digital Tourist ID · Authority dashboard</p>
+  <p style="margin-bottom:16px;line-height:1.6;">Continuous location monitoring against safe, caution and restricted zones; a hybrid
+  (rules + Isolation Forest) detector that raises alerts even when the tourist cannot respond; a tamper-evident Digital ID
+  verified by a simulated validator network; and automatic incident logging with notifications to emergency contacts.</p>
+  <a class="btn btn-primary" href="/register">Register Tourist →</a>
+  <a class="btn btn-outline" href="/dashboard" style="margin-left:10px;">Open Dashboard</a>
+  <a class="btn btn-outline" href="/intro" style="margin-left:10px;">Presentation intro</a>
+</div>
+<div class="card"><h2>Demo flow</h2>
+  <ol style="margin-left:20px;line-height:1.9;font-size:14px;">
+    <li>Register a tourist → Digital ID + QR → <em>Verify ID</em> (7 checks)</li>
+    <li>Open the <strong>Dashboard</strong>, pick the tourist, press a scenario: the map replays GPS fixes live</li>
+    <li>Watch incidents, SMS notifications and the risk heat-map appear; Acknowledge / Resolve incidents</li>
+    <li>In <em>Ledger network</em>, tamper with a node, run the audit, then heal it</li>
+    <li>Open the <strong>Tourist app view</strong> (phone): long-press SOS, live GPS, offline queue, EN/हिन्दी/ગુજરાતી</li>
+  </ol>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Digital Tourist ID{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Digital Tourist ID</h1><p class="sub">Block #{{ data.index_no }} mined (nonce {{ data.nonce }}) and approved by validators {{ data.validator_votes }}</p>
+  <div class="grid-2"><div>
+    <table>
+      <tr><td><strong>Tourist ID</strong></td><td>{{ data.tourist_id }}</td></tr>
+      <tr><td><strong>Name</strong></td><td>{{ data.name }}</td></tr>
+      <tr><td><strong>Nationality</strong></td><td>{{ data.nationality }}</td></tr>
+      <tr><td><strong>Passport (salted hash)</strong></td><td style="font-family:monospace;font-size:12px;">{{ data.passport_hash_short }}</td></tr>
+      <tr><td><strong>Emergency Contact</strong></td><td>{{ data.emergency_contact }}</td></tr>
+      <tr><td><strong>Valid Until</strong></td><td>{{ data.valid_until[:19] }} UTC</td></tr>
+      <tr><td><strong>SHA-256 payload hash</strong></td><td style="font-family:monospace;font-size:11px;word-break:break-all;">{{ data.payload_hash }}</td></tr>
+      <tr><td><strong>Block hash</strong></td><td style="font-family:monospace;font-size:11px;word-break:break-all;">{{ data.block_hash }}</td></tr>
+      <tr><td><strong>Previous hash</strong></td><td style="font-family:monospace;font-size:11px;word-break:break-all;">{{ data.previous_hash }}</td></tr>
+    </table>
+    <div class="row" style="margin-top:16px;">
+      <a class="btn btn-success" href="/verify/{{ data.tourist_id }}">Verify ID</a>
+      <a class="btn btn-primary" href="/tourist/{{ data.tourist_id }}">Tourist app view</a>
+      <a class="btn btn-outline" href="/dashboard">Dashboard</a>
+    </div></div>
+    <div style="text-align:center;"><p class="sub">Scan to verify (HMAC-signed QR)</p>
+      <img src="{{ data.qr_url }}" alt="QR" style="width:230px;height:230px;border:1px solid #CFD8DC;border-radius:8px;">
+      <p style="font-size:11px;color:#78909C;margin-top:8px;">{{ data.tourist_id }}</p></div></div>
+</div>
+{% endblock %}

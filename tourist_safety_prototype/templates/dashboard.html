@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Authority Dashboard{% endblock %}
+{% block content %}
+<h1>Authority Dashboard</h1><p class="sub">Live map · incident lifecycle · notifications · risk heat-map · ledger network (auto-refresh every 2 s)</p>
+<div class="stats" id="stats"></div>
+
+<div class="card">
+  <h2>Scenario player (replays simulated GPS fixes through the real pipeline)</h2>
+  <div class="row">
+    <select id="tsel" style="width:260px;"></select>
+    <button class="btn btn-success" onclick="play('normal')">Normal walk</button>
+    <button class="btn btn-danger" onclick="play('geofence_violation')">Geo-fence violation</button>
+    <button class="btn btn-warn" onclick="play('route_deviation')">Route deviation</button>
+    <button class="btn btn-outline" onclick="play('prolonged_inactivity')">Prolonged inactivity</button>
+    <button class="btn btn-outline" onclick="play('lost_wandering')">Lost / wandering</button>
+    <button class="btn btn-outline" onclick="play('signal_loss')">Signal loss</button>
+    <button class="btn btn-danger" onclick="sos()">🆘 SOS</button>
+    <button class="btn btn-outline" onclick="stopPlay()">Stop</button>
+    <button class="btn btn-primary" onclick="autoDemo()">▶ Auto demo (full run)</button>
+    <label style="margin:0 0 0 8px;display:inline;">speed</label>
+    <input type="range" id="speed" min="40" max="800" value="220" style="width:120px;">
+    <span id="pstat" class="sub" style="margin:0;"></span>
+  </div>
+</div>
+
+<div class="grid-2">
+  <div class="card">
+    <h2>Live map <span class="sub" style="font-weight:normal;">(Somnath, simulated)</span></h2>
+    <div class="row" style="font-size:12px;margin-bottom:6px;">
+      <label style="margin:0;"><input type="checkbox" id="lz" checked> zones</label>
+      <label style="margin:0;"><input type="checkbox" id="lr" checked> route</label>
+      <label style="margin:0;"><input type="checkbox" id="lh" checked> heat-map</label>
+      <label style="margin:0;"><input type="checkbox" id="li" checked> incidents</label>
+      <button class="btn btn-outline btn-sm" onclick="setView('full')">Full</button>
+      <button class="btn btn-outline btn-sm" onclick="setView('route')">Route</button>
+      <a class="btn btn-outline btn-sm" href="/map" target="_blank">Street map (folium)</a>
+    </div>
+    <svg id="map" viewBox="-1800 -1800 3600 3600" style="width:100%;background:#eaf3f8;border-radius:8px;border:1px solid #cfd8dc;"></svg>
+    <div style="font-size:11px;color:#546E7A;margin-top:6px;">
+      <span style="color:#2e7d32">■</span> safe &nbsp;<span style="color:#f9a825">■</span> caution &nbsp;<span style="color:#c62828">■</span> restricted &nbsp;
+      <span style="color:#1565c0">━</span> planned route &nbsp;<span style="color:#00897b">▲</span> tourist &nbsp;● incidents by severity
+    </div>
+  </div>
+  <div>
+    <div class="card"><h2>Tourists &amp; risk score</h2><div id="ttable"></div></div>
+    <div class="card"><h2>Ledger network (permissioned, simulated)</h2><div id="net"></div>
+      <div class="row" style="margin-top:10px;">
+        <button class="btn btn-warn btn-sm" onclick="net('tamper',{node:1})">Tamper Node-2</button>
+        <button class="btn btn-warn btn-sm" onclick="net('tamper',{node:0})">Tamper Node-1</button>
+        <button class="btn btn-outline btn-sm" onclick="net('audit')">Run audit</button>
+        <button class="btn btn-success btn-sm" onclick="net('heal')">Heal from majority</button>
+      </div><div id="audit" class="sub" style="margin-top:8px;"></div></div>
+  </div>
+</div>
+
+<div class="card"><h2>Incident log</h2><div id="inc"></div></div>
+<div class="card"><h2>Notifications sent to emergency contacts / authority</h2>
+  <p class="sub">SMS channel is simulated (delay drawn from a model); dashboard channel is real.</p><div id="notes"></div></div>
+<div id="cap" style="display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(13,59,102,.96);color:#fff;font-size:20px;padding:14px 24px;text-align:center;z-index:50;border-top:3px solid #9B1C1C;"></div>
+{% endblock %}
+{% block scripts %}<script src="/static/dashboard.js"></script>{% endblock %}
